@@ -1,81 +1,392 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZEWE Mobile Diesel & Citywide Services</title>
+  <meta name="description" content="Mobile truck repair & roadside service. Serving PA, NJ, MD, DE, NY. Call 531-225-7692." />
 
-<title>ZEWE Mobile Diesel & Citywide Services</title>
+  <style>
+    :root{
+      --bg:#070708;
+      --panel:#0f1012;
+      --panel2:#0b0c0e;
+      --text:#e9e9ea;
+      --muted:#b7b7bb;
+      --gold:#f7c600;
+      --gold2:#ffdf5a;
+      --line:rgba(255,255,255,.08);
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --radius: 18px;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, black, #1a1a1a);
-    color: white;
-    text-align: center;
-}
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 70% 20%, rgba(247,198,0,.18), transparent 60%),
+        radial-gradient(800px 500px at 20% 80%, rgba(247,198,0,.12), transparent 60%),
+        linear-gradient(180deg, #050506 0%, #0b0c0e 60%, #070708 100%);
+      min-height:100vh;
+    }
 
-.container {
-    margin-top: 100px;
-}
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1050px; margin:0 auto; padding:28px 18px 60px;}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:10px 0 22px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      letter-spacing:.8px;
+    }
+    .badge{
+      width:38px; height:38px; border-radius:12px;
+      display:grid; place-items:center;
+      background: linear-gradient(180deg, rgba(247,198,0,.28), rgba(247,198,0,.10));
+      border:1px solid rgba(247,198,0,.35);
+      box-shadow: 0 10px 25px rgba(247,198,0,.10);
+      font-weight:900;
+      color:var(--gold2);
+    }
+    .brand h1{
+      margin:0;
+      font-size:14px;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .nav{
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+    .pill{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color:var(--muted);
+      font-weight:650;
+      font-size:13px;
+    }
+    .pill:hover{border-color: rgba(247,198,0,.35); color:var(--text)}
 
-.card {
-    background: rgba(0,0,0,0.8);
-    padding: 30px;
-    border-radius: 15px;
-    width: 80%;
-    max-width: 500px;
-    margin: auto;
-    box-shadow: 0 0 20px rgba(255,215,0,0.5);
-}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      align-items:stretch;
+    }
 
-h1 {
-    color: gold;
-    font-size: 36px;
-    text-shadow: 0 0 10px gold;
-}
+    @media (max-width: 880px){
+      .hero{grid-template-columns: 1fr; }
+      .nav{display:none;}
+    }
 
-p {
-    font-size: 18px;
-    margin: 10px 0;
-}
+    .card{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
 
-.call {
-    font-size: 24px;
-    margin-top: 20px;
-}
+    .heroLeft{
+      padding:26px 22px 22px;
+      position:relative;
+    }
 
-.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background: gold;
-    color: black;
-    font-weight: bold;
-    border-radius: 8px;
-    text-decoration: none;
-}
-</style>
+    .glow{
+      position:absolute; inset:-80px -120px auto auto;
+      width:380px; height:260px;
+      background: radial-gradient(circle at 30% 30%, rgba(247,198,0,.40), transparent 60%);
+      filter: blur(18px);
+      opacity:.55;
+      pointer-events:none;
+    }
 
+    .bigTitle{
+      margin:0;
+      font-size:44px;
+      line-height:1.06;
+      letter-spacing:.6px;
+      font-weight:950;
+      text-transform:uppercase;
+      color:var(--gold);
+      text-shadow: 0 10px 30px rgba(247,198,0,.18);
+    }
+
+    @media (max-width: 520px){
+      .bigTitle{font-size:34px;}
+    }
+
+    .sub{
+      margin:12px 0 0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+      max-width:62ch;
+    }
+
+    .highlights{
+      display:flex; flex-wrap:wrap;
+      gap:10px;
+      margin:18px 0 18px;
+    }
+    .chip{
+      border-radius:999px;
+      border:1px solid rgba(247,198,0,.28);
+      background: rgba(247,198,0,.10);
+      color: #ffeaa1;
+      padding:8px 10px;
+      font-weight:750;
+      font-size:13px;
+    }
+
+    .ctaRow{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top:18px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:13px 15px;
+      border-radius: 12px;
+      font-weight:900;
+      letter-spacing:.3px;
+      border:1px solid rgba(247,198,0,.35);
+      background: linear-gradient(180deg, var(--gold2), var(--gold));
+      color:#141414;
+      box-shadow: 0 16px 35px rgba(247,198,0,.18);
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{filter: brightness(1.03)}
+    .btn2{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:13px 15px;
+      border-radius: 12px;
+      font-weight:850;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+    }
+    .btn2:hover{border-color: rgba(247,198,0,.25)}
+
+    .heroRight{
+      padding:18px;
+      background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.15));
+    }
+
+    .boxTitle{
+      margin:0 0 10px;
+      font-weight:900;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .callBox{
+      padding:16px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.25);
+    }
+    .callNum{
+      font-size:26px;
+      font-weight:950;
+      margin:6px 0 6px;
+      color: var(--text);
+    }
+    .small{
+      color:var(--muted);
+      margin:0;
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    @media (max-width: 880px){ .grid{grid-template-columns: 1fr; } }
+
+    .service{
+      padding:14px;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    }
+    .service h3{
+      margin:0 0 6px;
+      font-size:15px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .service p{
+      margin:0;
+      color:var(--muted);
+      font-size:13.5px;
+      line-height:1.5;
+    }
+
+    .section{
+      margin-top:18px;
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+
+    .section h2{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:950;
+      letter-spacing:.3px;
+      text-transform:uppercase;
+      color:#fff;
+    }
+
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 880px){ .twoCol{grid-template-columns: 1fr;} }
+
+    .list{
+      margin:0; padding:0; list-style:none;
+      display:grid; gap:10px;
+    }
+    .li{
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      color: var(--muted);
+      font-weight:650;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .li b{color:#fff}
+
+    .footer{
+      margin-top:18px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      justify-content:space-between; align-items:center;
+      color: rgba(255,255,255,.55);
+      font-size:12.5px;
+      padding:10px 2px;
+    }
+
+    .accentLine{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(247,198,0,.35), transparent);
+      margin:18px 0 0;
+      opacity:.9;
+    }
+  </style>
 </head>
 
 <body>
-
-<div class="container">
-
-    <div class="card">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="badge">Z</div>
         <h1>ZEWE Mobile Diesel & Citywide Services</h1>
-
-        <p>We come to you</p>
-        <p>Truck Repair | Roadside Service</p>
-        <p>Serving PA • NJ • MD • DE • NY</p>
-
-        <div class="call">Call: 531-225-7692</div>
-
-        <a class="btn" href="tel:5312257692">Call Now</a>
+      </div>
+      <div class="nav">
+        <a class="pill" href="#services">Services</a>
+        <a class="pill" href="#areas">Service Area</a>
+        <a class="pill" href="#hours">Hours</a>
+        <a class="pill" href="#contact">Contact</a>
+      </div>
     </div>
 
-</div>
+    <div class="hero">
+      <div class="card heroLeft">
+        <div class="glow"></div>
+        <h2 class="bigTitle">ZEWE Mobile Diesel &<br/>Citywide Services</h2>
+        <p class="sub">
+          We come to you — <b>truck repair</b> & <b>roadside service</b>.
+          Fast response, professional work, and clear communication.
+        </p>
 
+        <div class="highlights">
+          <div class="chip">Mobile Repair</div>
+          <div class="chip">Roadside Service</div>
+          <div class="chip">Diagnostics</div>
+          <div class="chip">Emergency Calls</div>
+        </div>
+
+        <div class="ctaRow">
+          <a class="btn" href="tel:+15312257692">📞 Call Now: 531-225-7692</a>
+          <a class="btn2" href="#services">See Services</a>
+        </div>
+
+        <div class="accentLine"></div>
+
+        <div class="grid" id="services">
+          <div class="service">
+            <h3>Roadside Assistance</h3>
+            <p>Breakdowns, no-start, minor repairs, and emergency support on-site.</p>
+          </div>
+          <div class="service">
+            <h3>Diesel Diagnostics</h3>
+            <p>Scan & troubleshoot issues to get you back moving faster.</p>
+          </div>
+          <div class="service">
+            <h3>Truck Repair</h3>
+            <p>On-the-road repairs where possible — honest and reliable service.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card heroRight" id="contact">
+        <div class="callBox">
+          <p class="boxTitle">Contact</p>
+          <p class="small">Call anytime for availability & pricing.</p>
+          <div class="callNum">531-225-7692</div>
+          <p class="small"><b>Fast response</b> for PA • NJ • MD • DE • NY</p>
+          <div class="ctaRow" style="margin-top:12px;">
+            <a class="btn" style="width:100%;" href="tel:+15312257692">Call Now</a>
+          </div>
+        </div>
+
+        <div class="section" id="areas">
+          <h2>Service Area</h2>
+          <ul class="list">
+            <li class="li"><b>Pennsylvania (PA)</b> — Philly region + highways</li>
+            <li class="li"><b>New Jersey (NJ)</b> — nearby routes & stops</li>
+            <li class="li"><b>Maryland (MD)</b> • <b>Delaware (DE)</b> • <b>New York (NY)</b></li>
+          </ul>
+        </div>
+
+        <div class="section" id="hours">
+          <h2>Hours</h2>
+          <ul class="list">
+            <li class="li"><b>Mon–Sun:</b> Call / Text for availability</li>
+            <li class="li"><b>Emergency:</b> Roadside help when possible</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>© <span id="yr"></span> ZEWE Mobile Diesel & Citywide Services</div>
+      <div>Built on GitHub Pages</div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
